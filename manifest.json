@@ -1,0 +1,28 @@
+{
+    "manifest_version":         2,
+    "icons": {
+      "128": "quiz.png"
+    },
+    "permissions": [
+       "tabs", "<all_urls>" , "storage"
+     ],
+     "background":
+     {
+         "scripts": ["background.js"]
+     },
+    "content_scripts":          [ {
+        "js":       [ "jquery-3.1.0.min.js", "embed.js" ],
+        "matches":  [   "<all_urls>"
+        ],
+        "run_at":"document_end"
+    } ],
+    "description":              "QuizJP",
+    "name":                     "QuizJP",
+    "version":                  "1",
+    "web_accessible_resources": ["layout.html"],
+    "content_security_policy":  "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "browser_action": {
+      "default_icon": "quiz.png",
+      "default_popup": "popup.html"
+    }
+}

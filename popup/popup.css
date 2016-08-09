@@ -1,0 +1,7 @@
+.container{
+  width: 170px;
+  padding: 20px;
+}
+.inline-style{
+  display: inline-block !important;
+}

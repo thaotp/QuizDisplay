@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <link href="pure-min.css" rel="stylesheet" type="text/css">
+  <link type="text/css" href="popup/popup.css" rel="stylesheet">
+  <script type="text/javascript" src="popup/popup.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <form class="pure-form pure-form-aligned">
+      <fieldset>
+          <div class="pure-control-group">
+            <select id="js-minute" class="pure-input-1-2">
+              <option value='0'>0s</option>
+              <option value='3000'>3s</option>
+              <option value='30000'>30s</option>
+              <option value='60000'>1 minute</option>
+              <option value='180000'>3 minute</option>
+              <option value='300000'>5 minute</option>
+              <option value='600000'>10 minute</option>
+            </select>
+            <button type="button" id='js-submit' class="pure-button pure-input-1-1 pure-button-primary">Change</button>
+          </div>
+      </fieldset>
+      <fieldset>
+          <div class="pure-control-group">
+            <input type='number' id='js-lesson' value='4' class='pure-input-1-2 inline-style'>
+            <button type="button" id='js-submit-lesson' class="pure-button pure-input-1-1 pure-button-primary">Change</button>
+          </div>
+      </fieldset>
+    </form>
+  </div>
+</body>
+</html>

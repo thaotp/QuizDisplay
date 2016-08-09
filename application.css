@@ -1,0 +1,112 @@
+body {
+    /*color:              white;*/
+    /*background-color: #888888;*/
+    height: 100%;
+    font-size: 15px;
+}
+html{
+  height: 100%;
+/*  position: absolute;
+  top: 25%;
+  right: 50%;*/
+  /*width: 600px;*/
+  width: 100%;
+  /*argin-right: -300px;*/
+}
+label{
+  word-break: break-all;
+}
+.label-quiz{
+  min-height: 32px;
+}
+.label-quiz rt{
+  font-size: 9px;
+}
+.label-quiz span{
+  bottom: 1px;
+  right: 0;
+  position: absolute;
+  max-width: 230px;
+}
+.label-quiz{
+  position: relative;
+}
+.add-red{
+  border-color: red !important;
+}
+.container{
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: auto;
+  /*width: 20%;  for Quiz*/
+  width: 50%;
+  margin: auto;
+  overflow-y: auto;
+  border-radius: 2px;
+  will-change: top, opacity;
+  z-index: 1003;
+  display: block;
+  opacity: 1;
+  transform: scaleX(1);
+  top: 10%;
+  background-color: #ffffff;
+}
+.lean-overlay{
+  position: fixed;
+  top: -100px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 125%;
+  width: 100%;
+  background: #000;
+  will-change: opacity;
+  z-index: 1002;
+  display: block;
+  opacity: 0.5;
+}
+.button-secondary {
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(66, 184, 221);
+}
+.text-style{
+  color: #0078e7;
+  font-weight: bold;
+}
+.font-style{
+  font-size: 10px !important;
+}
+.float-left{
+  float: left;
+}
+.float-right{
+  float: right;
+}
+.mean-below{
+  clear: both;
+  color: darkred;
+
+  font-size: 16px;
+  display: block;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mean-below:hover{
+  overflow: initial;
+  text-overflow: initial;
+}
+.label-type{
+  position: relative;
+}
+.count{
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  font-weight: bold;
+}

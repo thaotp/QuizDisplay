@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html><head>
+    <title>Embedded Hello World</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link href="pure-min.css" rel="stylesheet" type="text/css">
+    <link href="application.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="tmpl.min.js"></script>
+</head><body>
+  <div class='container'>
+    <form class="pure-form pure-form-stacked">
+        <fieldset>
+            <legend class="js-sentence">
+
+            </legend>
+
+            <div class="pure-g js-quizes">
+
+            </div>
+            <div class="pure-u-1">
+              <button type="submit" id="iButton" class="pure-button pure-button-primary">Submit</button>
+            </div>
+        </fieldset>
+    </form>
+
+  </div>
+  <div class='lean-overlay'></div>
+</body>
+<script type="text/x-tmpl" id="js-quiz">
+  <div class="pure-u-1">
+    <label class='label-quiz' for="multi-state-{%= o.id %}">
+      <ruby>
+        <rb>
+          {%= o.kanji_export %}
+        </rb>
+        <rp>/</rp>
+        <rt class='text-style font-style'>{%= o.kanji_note %}</rt>
+      </ruby>
+      <span>{%= o.mean %}</span>
+    </label>
+    <select id="multi-state-{%= o.id %}" data-name="{%= o.name_jp %}" class="pure-input-1 js-quiz">
+      {% for (var j=0; j<4; j++) { %}
+        <option>
+        {%= o.quiz_options[j] %}
+        </option>
+      {% } %}
+    </select>
+  </div>
+</script>
+<script type="text/x-tmpl" id="js-sentence">
+  <ruby>
+    <rb class='text-style'>
+      {%= o.content %}
+    </rb>
+    <rp>/</rp>
+    <rt>{%= o.mean %}</rt>
+  </ruby>
+</script>
+<script type="text/x-tmpl" id="js-quiz-2">
+  <div class="pure-u-1">
+    <label class='label-quiz' for="multi-state-{%= o.id %}">
+      <ruby class='float-left'>
+        <rb>
+          {%= o.kanji_export %}
+        </rb>
+        <rp>/</rp>
+        <rt class='text-style font-style'>{%= o.kanji_note %}</rt>
+      </ruby>
+      <ruby class='float-right'>
+        <rb>
+          {%= o.name %}
+        </rb>
+        <rp>/</rp>
+        <rt class='text-style font-style'>{%= o.romanji %}</rt>
+      </ruby>
+      <div class='mean-below'>{%= o.mean %}</div>
+    </label>
+    <label class='label-type'>
+      <span class='js-count count'>0</span>
+      <input type='text' data-correct='{%= o.name %}' class='pure-u-1 js-quizType'/>
+    </label>
+  </div>
+</script>
+<script type="text/x-tmpl" id="js-reader">
+  <div class="pure-g">
+    <div class='pure-u-1'>
+      <img class="pure-img" src="{%= o.url %}" alt="{%= o.name %}">
+    </div>
+  </div>
+</script>
+<script type= "text/javascript" src="application.js"></script>
+</html>
