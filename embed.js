@@ -88,9 +88,12 @@ function QuizerEmbed(options) {
           case "do_show":
             if(storageChange.newValue == true){
               module.showIframe();
-            }else{
+            }else if(storageChange.newValue == false){
               module.hideIframe();
               chrome.runtime.sendMessage({"setTimeout": true});
+            }else if(storageChange.newValue == 'delay'){
+              module.hideIframe();
+              chrome.runtime.sendMessage({"delay": true});
             }
 
             break;

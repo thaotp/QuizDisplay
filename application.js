@@ -9,6 +9,7 @@ function Quizer(options) {
     module.initData();
     module.eventSubmit();
     module.eventStoreChange();
+    module.wordSearch();
   }
 
   module.init = function(){
@@ -17,7 +18,7 @@ function Quizer(options) {
 
   module.initData = function(){
     module.getData('do_show', function(items){
-      if(items.do_show){
+      if(items.do_show == true){
         module.doShow()
         // module.appendData()
         module.appendReader()
@@ -55,15 +56,19 @@ function Quizer(options) {
           case "reader":
             module.appendReader()
             break;
+          case "do_show":
+            if(storageChange.oldValue == "delay"){
+              module.appendReader();
+            }
+            break;
         }
       }
     });
   }
 
   module.eventSubmit = function(){
-    $('form').on('submit', function(e){
+    $('.js-form-primary').on('submit', function(e){
       e.preventDefault();
-
       // For Quiz
       // $('.js-quiz').each(function(index, quiz){
       //   if($(quiz).data('name') != $(quiz).val()){
@@ -83,14 +88,20 @@ function Quizer(options) {
 
     })
 
+    $('#iCancel').on('click', function(e){
+      module.setData({ do_show: 'delay' } )
+    })
+
   }
 
-  module.doShow = function(){
-    module.postMessage({
+  module.doShow = function(options){
+    var data = {
       from: "owner-thaotp-page",
       command: "do_show",
       owner: 'page'
-    })
+    }
+    var command = jQuery.extend(data, options);
+    module.postMessage(command)
   }
 
   //Send to content script
@@ -150,14 +161,6 @@ function Quizer(options) {
 
   }
 
-  module.renderReader = function(items){
-    var content = ''
-    var reader = items.reader
-    content += tmpl("js-reader", reader);
-    $('.js-quizes').html(content)
-    $('.js-sentence').html(reader.lesson + " Nghỉ ngơi 1 lát đi")
-  }
-
   module.bindEventCountType = function(){
     $('#iButton').hide()
     $('.js-quizType:enabled').first().focus()
@@ -184,6 +187,73 @@ function Quizer(options) {
         return false;
       }
     })
+  }
+
+  module.renderReader = function(items){
+    var content = ''
+    var reader = items.reader
+    // reader.audio_url = 'https://s3-us-west-2.amazonaws.com/jplearn/audio/12+-+Dai+1+ka-+Bunkei.mp3'
+    content += tmpl("js-reader", reader);
+    $('.js-quizes').html(content)
+    $('.js-sentence').html(reader.lesson + " Nghỉ ngơi 1 lát đi")
+    return;
+    module.getGrammar(reader)
+  }
+
+  module.renderGrammar = function(grammar){
+    var content = ''
+    $.each(grammar.urls, function(index, url){
+      content += tmpl("js-render-grammar", {url: url});
+    });
+    $('.js-grammar').html(content)
+    // $('.js-grammar').show();
+  }
+
+  module.getGrammar = function(reader){
+    var xhr = new XMLHttpRequest();
+    var url = "https://jp-learn.herokuapp.com/api/v1/grammars/1"
+    xhr.open("GET", url + '?lesson='+reader.lesson, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        var grammar = JSON.parse(xhr.responseText);
+        if(grammar.urls){
+          module.renderGrammar(grammar)
+        }
+      }
+    }
+    xhr.send();
+  }
+
+  module.wordSearch = function(){
+    var minlength = 2;
+    var searchRequest = null;
+    $("#wordSearch").focus();
+    $("#wordSearch").keyup(function () {
+        $('.js-seach-result').html('')
+        var _this = this,
+        value = $(this).val().trim();
+        if (value.length >= minlength ) {
+          if (searchRequest != null) searchRequest.abort();
+          searchRequest = $.ajax({
+            type: "GET",
+            url: "https://jp-learn.herokuapp.com/api/v1/words/search",
+            data: {
+                'word' : value
+            },
+            dataType: "text",
+            success: function(data){
+              module.renderResults(JSON.parse(data))
+            }
+          });
+        }
+    });
+  }
+  module.renderResults = function(words){
+    var content = ''
+    $.each(words, function(index, word){
+      content += tmpl("js-render-result", word);
+    });
+    $('.js-seach-result').html(content)
   }
 
 }

@@ -110,3 +110,52 @@ label{
   right: -15px;
   font-weight: bold;
 }
+audio{
+  position: absolute;
+  right: 0;
+  bottom: 15px;
+}
+.side-left{
+  background-color: #ffffff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  width: 350px;
+  top: 5%;
+  height: 220px;
+  overflow-y: auto;
+}
+.side-left ul{
+  margin: 0;
+  padding: 15px;
+  white-space: nowrap;
+  list-style-type: none;
+  overflow:hidden;
+}
+.side-left ul li{
+  display: block;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+/*.side-left ul li:hover{
+  overflow: initial;
+  text-overflow: initial;
+}*/
+
+.images{
+  height: 300px;
+  overflow: auto;
+  border: 1px solid #888;
+  display: none;
+}
+.pure-form{
+  position: relative;
+}
+.result rt, .result rb{
+  font-size: 16px;
+}
+.hidden{
+  display: none;
+}

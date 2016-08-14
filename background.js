@@ -84,6 +84,13 @@ function BgQuiz(options) {
       module.settings.TIME = +message.minute
       module.clearTimeout();
       module.setTimeout(module.resetData)
+    }else if(message.delay){
+      module.clearTimeout();
+      module.setTimeout(function(){
+        var response = {}
+        response.do_show = true
+        module.setData(response)
+      })
     }
 
   }

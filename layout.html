@@ -10,7 +10,7 @@
     <script type="text/javascript" src="tmpl.min.js"></script>
 </head><body>
   <div class='container'>
-    <form class="pure-form pure-form-stacked">
+    <form class="pure-form pure-form-stacked js-form-primary">
         <fieldset>
             <legend class="js-sentence">
 
@@ -21,10 +21,23 @@
             </div>
             <div class="pure-u-1">
               <button type="submit" id="iButton" class="pure-button pure-button-primary">Submit</button>
+              <button type="button" id="iCancel" class="pure-button pure-button-primary">Cancel</button>
             </div>
         </fieldset>
     </form>
+    <div class="">
+      <div class="images js-grammar">
 
+      </div>
+    </div>
+  </div>
+  <div class='side-left hidden'>
+    <div class="pure-form">
+      <input type="search" class="pure-input-1" id="wordSearch" placeholder="">
+    </div>
+    <ul class='js-seach-result result'>
+
+    </ul>
   </div>
   <div class='lean-overlay'></div>
 </body>
@@ -89,6 +102,24 @@
       <img class="pure-img" src="{%= o.url %}" alt="{%= o.name %}">
     </div>
   </div>
+  <audio src="{%=o.audio_url%}" preload="auto" controls></audio>
+</script>
+<script type="text/x-tmpl" id="js-render-grammar">
+  <img class='pure-img' src="{%= o.url %}">
+</script>
+
+<script type="text/x-tmpl" id="js-render-result">
+  <li>
+    <ruby>
+      <rb class='text-style'>
+        {%= o.name %}
+      </rb>
+      <rp>/</rp>
+      <rt>{%= o.name_jp %}</rt>
+    </ruby>
+    <span>/ {%= o.romanji %} /</span>
+    <span>: {%= o.mean %}</span>
+  </li>
 </script>
 <script type= "text/javascript" src="application.js"></script>
 </html>
